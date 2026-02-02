@@ -2,7 +2,6 @@ import { useState } from 'react'
 import './App.css'
 import confetti from "@hiseb/confetti";
 
-
 function Square({ value, onSquareClick }) {
   return (
     <button className="square" onClick={onSquareClick}>{value}</button>
@@ -17,7 +16,15 @@ export default function Board() {
   let status;
   if (winner) {
     status = "Winner: " + winner;
-    confetti();
+    confetti({
+      duration: 5000,
+      particleCount: 100,
+      spread: 70,
+      decay: 0.95,
+      origin: {
+        y: 0.6,
+      },
+    });
 
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
@@ -56,7 +63,7 @@ export default function Board() {
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
       </div>
       {/* Reset button */}
-      <button className="reset-button bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer m-2" onClick={() => setSquares(Array(9).fill(null))}>Reset</button> 
+      <button className="reset-button bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer m-2" onClick={() => setSquares(Array(9).fill(null))}>Reset</button>
     </>
   );
 }
