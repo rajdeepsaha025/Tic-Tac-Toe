@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './App.css'
+import confetti from "@hiseb/confetti";
+
 
 function Square({ value, onSquareClick }) {
   return (
@@ -15,6 +17,8 @@ export default function Board() {
   let status;
   if (winner) {
     status = "Winner: " + winner;
+    confetti();
+
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
@@ -51,6 +55,8 @@ export default function Board() {
         <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
       </div>
+      {/* Reset button */}
+      <button className="reset-button bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer m-2" onClick={() => setSquares(Array(9).fill(null))}>Reset</button> 
     </>
   );
 }
